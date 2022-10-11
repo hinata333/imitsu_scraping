@@ -556,7 +556,7 @@ def main(c_number, select_pre):
             '従業員数': detail[2],
             '住所': detail[3],
             '会社URL': detail[4],
-            'ソースURL': page_url,
+            'ソースURL': detail_url,
           })
 
           df = pd.DataFrame(d_list)
