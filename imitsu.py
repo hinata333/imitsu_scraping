@@ -593,6 +593,15 @@ prefecture_ori = ['hokkaido', 'aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 
 button = st.button('Start')
 latest_interation = st.empty()
 bar = st.progress(0)
+
+pre_all = []
+tohoku = []
+kantou = []
+hokuriku = []
+tokai = []
+kinki = []
+tyugoku = []
+kyusyu = []
 def main(c_number, select_pre):
   if select_pre == '北海道': select_pre = 'hokkaido'
   elif select_pre == '青森県': select_pre = 'aomori'
@@ -692,6 +701,15 @@ def main(c_number, select_pre):
         'ソースURL': page_url,
       })
       df = pd.DataFrame(d_list)
+      ##################################
+      # pre_all.append({
+      #   '会社名': 'アクセスエラー',
+      #   '設立年': 'アクセスエラー',
+      #   '従業員数': 'アクセスエラー',
+      #   '住所': 'アクセスエラー',
+      #   '会社URL': 'アクセスエラー',
+      #   'ソースURL': page_url,
+      # })
       # df = None
       # pass
     else:
@@ -703,7 +721,7 @@ def main(c_number, select_pre):
       n = int(kensu) // 20 + 1
       if int(kensu) % 20 == 0:
         n = int(kensu) // 20
-      # n = 1
+      # n = 1 #####################################################################################################################
       for i in range(n):
         page_url = job.get('href') + f'pr-{select_pre}/' + f'?pn={i+1}#title'
         while True:
@@ -767,6 +785,79 @@ def main(c_number, select_pre):
           })
 
           df = pd.DataFrame(d_list)
+          ##################################
+          pre_all.append({
+            '会社名': detail[0],
+            '設立年': detail[1],
+            '従業員数': detail[2],
+            '住所': detail[3],
+            '会社URL': detail[4],
+            'ソースURL': detail_url,
+          })
+
+          if (select_pre == 'hokkaido') or (select_pre == 'aomori') or (select_pre == 'iwate') or (select_pre == 'miyagi') or (select_pre == 'akita') or (select_pre == 'yamagata') or (select_pre == 'fukushima'):
+            tohoku.append({
+              '会社名': detail[0],
+              '設立年': detail[1],
+              '従業員数': detail[2],
+              '住所': detail[3],
+              '会社URL': detail[4],
+              'ソースURL': detail_url,
+            })
+          elif (select_pre == 'ibaraki') or (select_pre == 'tochigi') or (select_pre == 'gumma') or (select_pre == 'saitama') or (select_pre == 'chiba') or (select_pre == 'tokyo') or (select_pre == 'kanagawa'):
+            kantou.append({
+              '会社名': detail[0],
+              '設立年': detail[1],
+              '従業員数': detail[2],
+              '住所': detail[3],
+              '会社URL': detail[4],
+              'ソースURL': detail_url,
+            })
+          elif (select_pre == 'niigata') or (select_pre == 'toyama') or (select_pre == 'ishikawa') or (select_pre == 'fukui') or (select_pre == 'yamanashi') or (select_pre == 'nagano'):
+            hokuriku.append({
+              '会社名': detail[0],
+              '設立年': detail[1],
+              '従業員数': detail[2],
+              '住所': detail[3],
+              '会社URL': detail[4],
+              'ソースURL': detail_url,
+            })
+          elif (select_pre == 'gifu') or (select_pre == 'shizuoka') or (select_pre == 'aichi') or (select_pre == 'mie'):
+            tokai.append({
+              '会社名': detail[0],
+              '設立年': detail[1],
+              '従業員数': detail[2],
+              '住所': detail[3],
+              '会社URL': detail[4],
+              'ソースURL': detail_url,
+            })
+          elif (select_pre == 'shiga') or (select_pre == 'kyoto') or (select_pre == 'osaka') or (select_pre == 'hyogo') or (select_pre == 'nara') or (select_pre == 'wakayama'):
+            kinki.append({
+              '会社名': detail[0],
+              '設立年': detail[1],
+              '従業員数': detail[2],
+              '住所': detail[3],
+              '会社URL': detail[4],
+              'ソースURL': detail_url,
+            })
+          elif (select_pre == 'tottori') or (select_pre == 'shimane') or (select_pre == 'okayama') or (select_pre == 'hiroshima') or (select_pre == 'yamaguchi') or (select_pre == 'tokushima') or (select_pre == 'kagawa') or (select_pre == 'ehime') or (select_pre == 'kochi'):
+            tyugoku.append({
+              '会社名': detail[0],
+              '設立年': detail[1],
+              '従業員数': detail[2],
+              '住所': detail[3],
+              '会社URL': detail[4],
+              'ソースURL': detail_url,
+            })
+          elif (select_pre == 'fukuoka') or (select_pre == 'saga') or (select_pre == 'nagasaki') or (select_pre == 'kumamoto') or (select_pre == 'oita') or (select_pre == 'miyazaki') or (select_pre == 'kagoshima') or (select_pre == 'okinawa'):
+            kyusyu.append({
+              '会社名': detail[0],
+              '設立年': detail[1],
+              '従業員数': detail[2],
+              '住所': detail[3],
+              '会社URL': detail[4],
+              'ソースURL': detail_url,
+            })
 
     
     return df
@@ -781,10 +872,10 @@ if button:
     cate = str(cate_elem).split('_')[1]
     print('index:', int(c_number))
     print('cate:',cate)
-    for select_pre in prefecture:
+    for k, select_pre in enumerate(prefecture):
       df = main(c_number, select_pre)
       # print(df)
-      st.write(f'### {cate} ({select_pre})結果 {i+1}/{len(cates)*len(prefecture)}', df)
+      st.write(f'### {cate} ({select_pre})結果 {k+i+1}/{len(cates)*len(prefecture)}', df)
       # with pd.ExcelWriter("export_data.xlsx") as EW:
       #   csv = df.to_excel(EW, index=False, sheet_name=f"{cate}")
       print(any(df))
@@ -795,6 +886,55 @@ if button:
         href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_{select_pre}.csv">Download</a>'
         st.markdown(f"{cate}_{select_pre}.csv: {href}", unsafe_allow_html=True)
     # csvs.append(csv)
+  st.write(f'## --------------------------')
+  #################################################
+  df_pre_all = pd.DataFrame(pre_all)
+  csv_pre_all = df_pre_all.to_csv(index=False, encoding='utf-8-sig')
+  b64 = base64.b64encode(csv_pre_all.encode('utf-8-sig')).decode()
+  href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_全国.csv">Download</a>'
+  st.markdown(f"{cate}_全国.csv: {href}", unsafe_allow_html=True)
+  #################################################
+  df_tohoku = pd.DataFrame(tohoku)
+  csv_tohoku = df_tohoku.to_csv(index=False, encoding='utf-8-sig')
+  b64 = base64.b64encode(csv_tohoku.encode('utf-8-sig')).decode()
+  href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_北海道・東北.csv">Download</a>'
+  st.markdown(f"{cate}_北海道・東北.csv: {href}", unsafe_allow_html=True)
+  #################################################
+  df_kantou = pd.DataFrame(kantou)
+  csv_kantou = df_kantou.to_csv(index=False, encoding='utf-8-sig')
+  b64 = base64.b64encode(csv_kantou.encode('utf-8-sig')).decode()
+  href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_関東.csv">Download</a>'
+  st.markdown(f"{cate}_関東.csv: {href}", unsafe_allow_html=True)
+  #################################################
+  df_hokuriku = pd.DataFrame(hokuriku)
+  csv_hokuriku = df_hokuriku.to_csv(index=False, encoding='utf-8-sig')
+  b64 = base64.b64encode(csv_hokuriku.encode('utf-8-sig')).decode()
+  href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_北陸・甲信越.csv">Download</a>'
+  st.markdown(f"{cate}_北陸・甲信越.csv: {href}", unsafe_allow_html=True)
+  #################################################
+  df_tokai = pd.DataFrame(tokai)
+  csv_tokai = df_tokai.to_csv(index=False, encoding='utf-8-sig')
+  b64 = base64.b64encode(csv_tokai.encode('utf-8-sig')).decode()
+  href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_東海.csv">Download</a>'
+  st.markdown(f"{cate}_東海.csv: {href}", unsafe_allow_html=True)
+  #################################################
+  df_kinki = pd.DataFrame(kinki)
+  csv_kinki = df_kinki.to_csv(index=False, encoding='utf-8-sig')
+  b64 = base64.b64encode(csv_kinki.encode('utf-8-sig')).decode()
+  href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_近畿.csv">Download</a>'
+  st.markdown(f"{cate}_近畿.csv: {href}", unsafe_allow_html=True)
+  #################################################
+  df_tyugoku = pd.DataFrame(tyugoku)
+  csv_tyugoku = df_tyugoku.to_csv(index=False, encoding='utf-8-sig')
+  b64 = base64.b64encode(csv_tyugoku.encode('utf-8-sig')).decode()
+  href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_中国・四国.csv">Download</a>'
+  st.markdown(f"{cate}_中国・四国.csv: {href}", unsafe_allow_html=True)
+  #################################################
+  df_kyusyu = pd.DataFrame(kyusyu)
+  csv_kyusyu = df_kyusyu.to_csv(index=False, encoding='utf-8-sig')
+  b64 = base64.b64encode(csv_kyusyu.encode('utf-8-sig')).decode()
+  href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_九州・沖縄.csv">Download</a>'
+  st.markdown(f"{cate}_九州・沖縄.csv: {href}", unsafe_allow_html=True)
   st.write(f'## ---------Done----------')
   # for csv in csvs:
   #   b64 = base64.b64encode(csv.encode('utf-8-sig')).decode()
