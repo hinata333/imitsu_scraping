@@ -1,10 +1,8 @@
 import streamlit as st
-import time
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 from time import sleep
-import os
 import base64
 
 st.title('アイミツ　Webスクレイピング')
@@ -250,7 +248,7 @@ for c, cte in enumerate(ori_cte_elem):
 
 st.write('カテゴリー数:', len(ori_cte_elem)-37)
 st.write(' ')
-all_cate = st.checkbox('一括チェック', value=False)
+# all_cate = st.checkbox('一括チェック', value=False)
 st.write('・取得するカテゴリーを選択して下さい。')
 col_0, col_1, col_2, col_3 = st.columns(4)
 col_0_2, col_1_2, col_2_2, col_3_2 = st.columns(4)
@@ -268,220 +266,71 @@ colu_0_3, colu_1_3, colu_2_3, colu_3_3 = st.columns(4)
 colu_0_4, colu_1_4, colu_2_4, colu_3_4 = st.columns(4)
 colu_0_5, colu_1_5, colu_2_5, colu_3_5 = st.columns(4)
 colu_0_6, colu_1_6, colu_2_6, colu_3_6 = st.columns(4)
-# colu_0_7, colu_1_7, colu_2_7, colu_3_7 = st.columns(4)
-# colu_0_8, colu_1_8, colu_2_8, colu_3_8 = st.columns(4)
-# colu_0_9, colu_1_9, colu_2_9, colu_3_9 = st.columns(4)
-# colu_0_10, colu_1_10, colu_2_10, colu_3_10 = st.columns(4)
-# colum_0, colum_1, colum_2, colum_3 = st.columns(4)
-# colum_0_2, colum_1_2, colum_2_2, colum_3_2 = st.columns(4)
-# colum_0_3, colum_1_3, colum_2_3, colum_3_3 = st.columns(4)
-# colum_0_4, colum_1_4, colum_2_4, colum_3_4 = st.columns(4)
-# colum_0_5, colum_1_5, colum_2_5, colum_3_5 = st.columns(4)
-# colum_0_6, colum_1_6, colum_2_6, colum_3_6 = st.columns(4)
-if all_cate:
-  with col_0: elem_0 = st.checkbox(f'{ori_cte[0]}', value=True)
-  with col_1: elem_1 = st.checkbox(f'{ori_cte[1]}', value=True)
-  with col_2: elem_2 = st.checkbox(f'{ori_cte[2]}', value=True)
-  with col_3: elem_3 = st.checkbox(f'{ori_cte[3]}', value=True)
-  with col_0_2: elem_4 = st.checkbox(f'{ori_cte[4]}', value=True)
-  with col_1_2: elem_5 = st.checkbox(f'{ori_cte[5]}', value=True)
-  with col_2_2: elem_6 = st.checkbox(f'{ori_cte[6]}', value=True)
-  with col_3_2: elem_7 = st.checkbox(f'{ori_cte[7]}', value=True)
-  with col_0_3: elem_8 = st.checkbox(f'{ori_cte[8]}', value=True)
-  with col_1_3: elem_9 = st.checkbox(f'{ori_cte[9]}', value=True)
-  with col_2_3: elem_10 = st.checkbox(f'{ori_cte[10]}', value=True)
-  with col_3_3: elem_11 = st.checkbox(f'{ori_cte[11]}', value=True)
-  with col_0_4: elem_12 = st.checkbox(f'{ori_cte[12]}', value=True)
-  with col_1_4: elem_13 = st.checkbox(f'{ori_cte[13]}', value=True)
-  with col_2_4: elem_14 = st.checkbox(f'{ori_cte[14]}', value=True)
-  with col_3_4: elem_15 = st.checkbox(f'{ori_cte[15]}', value=True)
-  with col_0_5: elem_16 = st.checkbox(f'{ori_cte[16]}', value=True)
-  with col_1_5: elem_17 = st.checkbox(f'{ori_cte[17]}', value=True)
-  with col_2_5: elem_18 = st.checkbox(f'{ori_cte[18]}', value=True)
-  with col_3_5: elem_19 = st.checkbox(f'{ori_cte[19]}', value=True)
-  with col_0_6: elem_20 = st.checkbox(f'{ori_cte[20]}', value=True)
-  with col_1_6: elem_21 = st.checkbox(f'{ori_cte[21]}', value=True)
-  with col_2_6: elem_22 = st.checkbox(f'{ori_cte[22]}', value=True)
-  with col_3_6: elem_23 = st.checkbox(f'{ori_cte[23]}', value=True)
-  with col_0_7: elem_24 = st.checkbox(f'{ori_cte[24]}', value=True)
-  with col_1_7: elem_25 = st.checkbox(f'{ori_cte[25]}', value=True)
-  with col_2_7: elem_26 = st.checkbox(f'{ori_cte[26]}', value=True)
-  with col_3_7: elem_27 = st.checkbox(f'{ori_cte[27]}', value=True)
-  with col_0_8: elem_28 = st.checkbox(f'{ori_cte[28]}', value=True)
-  with col_1_8: elem_29 = st.checkbox(f'{ori_cte[29]}', value=True)
-  with col_2_8: elem_30 = st.checkbox(f'{ori_cte[30]}', value=True)
-  with col_3_8: elem_31 = st.checkbox(f'{ori_cte[31]}', value=True)
-  with col_0_9: elem_32 = st.checkbox(f'{ori_cte[32]}', value=True)
-  with col_1_9: elem_33 = st.checkbox(f'{ori_cte[33]}', value=True)
-  with col_2_9: elem_34 = st.checkbox(f'{ori_cte[34]}', value=True)
-  with col_3_9: elem_35 = st.checkbox(f'{ori_cte[35]}', value=True)
-  with col_0_10: elem_36 = st.checkbox(f'{ori_cte[36]}', value=True)
-  with col_1_10: elem_37 = st.checkbox(f'{ori_cte[37]}', value=True)
-  with col_2_10: elem_38 = st.checkbox(f'{ori_cte[38]}', value=True)
-  with col_3_10: elem_39 = st.checkbox(f'{ori_cte[39]}', value=True)
-  with colu_0: elem_40 = st.checkbox(f'{ori_cte[40]}', value=True)
-  with colu_1: elem_41 = st.checkbox(f'{ori_cte[41]}', value=True)
-  with colu_2: elem_42 = st.checkbox(f'{ori_cte[42]}', value=True)
-  with colu_3: elem_43 = st.checkbox(f'{ori_cte[43]}', value=True)
-  with colu_0_2: elem_44 = st.checkbox(f'{ori_cte[44]}', value=True)
-  with colu_1_2: elem_45 = st.checkbox(f'{ori_cte[45]}', value=True)
-  with colu_2_2: elem_46 = st.checkbox(f'{ori_cte[46]}', value=True)
-  with colu_3_2: elem_47 = st.checkbox(f'{ori_cte[47]}', value=True)
-  with colu_0_3: elem_48 = st.checkbox(f'{ori_cte[48]}', value=True)
-  with colu_1_3: elem_49 = st.checkbox(f'{ori_cte[49]}', value=True)
-  with colu_2_3: elem_50 = st.checkbox(f'{ori_cte[50]}', value=True)
-  with colu_3_3: elem_51 = st.checkbox(f'{ori_cte[51]}', value=True)
-  with colu_0_4: elem_52 = st.checkbox(f'{ori_cte[52]}', value=True)
-  with colu_1_4: elem_53 = st.checkbox(f'{ori_cte[53]}', value=True)
-  with colu_2_4: elem_54 = st.checkbox(f'{ori_cte[54]}', value=True)
-  with colu_3_4: elem_55 = st.checkbox(f'{ori_cte[55]}', value=True)
-  with colu_0_5: elem_56 = st.checkbox(f'{ori_cte[56]}', value=True)
-  with colu_1_5: elem_57 = st.checkbox(f'{ori_cte[57]}', value=True)
-  with colu_2_5: elem_58 = st.checkbox(f'{ori_cte[58]}', value=True)
-  with colu_3_5: elem_59 = st.checkbox(f'{ori_cte[59]}', value=True)
-  with colu_0_6: elem_60 = st.checkbox(f'{ori_cte[60]}', value=True)
-  with colu_1_6: elem_61 = st.checkbox(f'{ori_cte[61]}', value=True)
-  with colu_2_6: elem_62 = st.checkbox(f'{ori_cte[62]}', value=True)
-  with colu_3_6: elem_63 = st.checkbox(f'{ori_cte[63]}', value=True)
-  # with colu_0_7: elem_64 = st.checkbox(f'{ori_cte[64]}', value=True)
-  # with colu_1_7: elem_65 = st.checkbox(f'{ori_cte[65]}', value=True)
-  # with colu_2_7: elem_66 = st.checkbox(f'{ori_cte[66]}', value=True)
-  # with colu_3_7: elem_67 = st.checkbox(f'{ori_cte[67]}', value=True)
-  # with colu_0_8: elem_68 = st.checkbox(f'{ori_cte[68]}', value=True)
-  # with colu_1_8: elem_69 = st.checkbox(f'{ori_cte[69]}', value=True)
-  # with colu_2_8: elem_70 = st.checkbox(f'{ori_cte[70]}', value=True)
-  # with colu_3_8: elem_71 = st.checkbox(f'{ori_cte[71]}', value=True)
-  # with colu_0_9: elem_72 = st.checkbox(f'{ori_cte[72]}', value=True)
-  # with colu_1_9: elem_73 = st.checkbox(f'{ori_cte[73]}', value=True)
-  # with colu_2_9: elem_74 = st.checkbox(f'{ori_cte[74]}', value=True)
-  # with colu_3_9: elem_75 = st.checkbox(f'{ori_cte[75]}', value=True)
-  # with colu_0_10: elem_76 = st.checkbox(f'{ori_cte[76]}', value=True)
-  # with colu_1_10: elem_77 = st.checkbox(f'{ori_cte[77]}', value=True)
-  # with colu_2_10: elem_78 = st.checkbox(f'{ori_cte[78]}', value=True)
-  # with colu_3_10: elem_79 = st.checkbox(f'{ori_cte[79]}', value=True)
-  # with colum_0: elem_80 = st.checkbox(f'{ori_cte[80]}', value=True)
-  # with colum_1: elem_81 = st.checkbox(f'{ori_cte[81]}', value=True)
-  # with colum_2: elem_82 = st.checkbox(f'{ori_cte[82]}', value=True)
-  # with colum_3: elem_83 = st.checkbox(f'{ori_cte[83]}', value=True)
-  # with colum_0_2: elem_84 = st.checkbox(f'{ori_cte[84]}', value=True)
-  # with colum_1_2: elem_85 = st.checkbox(f'{ori_cte[85]}', value=True)
-  # with colum_2_2: elem_86 = st.checkbox(f'{ori_cte[86]}', value=True)
-  # with colum_3_2: elem_87 = st.checkbox(f'{ori_cte[87]}', value=True)
-  # with colum_0_3: elem_88 = st.checkbox(f'{ori_cte[88]}', value=True)
-  # with colum_1_3: elem_89 = st.checkbox(f'{ori_cte[89]}', value=True)
-  # with colum_2_3: elem_90 = st.checkbox(f'{ori_cte[90]}', value=True)
-  # with colum_3_3: elem_91 = st.checkbox(f'{ori_cte[91]}', value=True)
-  # with colum_0_4: elem_92 = st.checkbox(f'{ori_cte[92]}', value=True)
-  # with colum_1_4: elem_93 = st.checkbox(f'{ori_cte[93]}', value=True)
-  # with colum_2_4: elem_94 = st.checkbox(f'{ori_cte[94]}', value=True)
-  # with colum_3_4: elem_95 = st.checkbox(f'{ori_cte[95]}', value=True)
-  # with colum_0_5: elem_96 = st.checkbox(f'{ori_cte[96]}', value=True)
-  # with colum_1_5: elem_97 = st.checkbox(f'{ori_cte[97]}', value=True)
-  # with colum_2_5: elem_98 = st.checkbox(f'{ori_cte[98]}', value=True)
-  # with colum_3_5: elem_99 = st.checkbox(f'{ori_cte[99]}', value=True)
-  # with colum_0_6: elem_100 = st.checkbox(f'{ori_cte[100]}', value=True)
-else:
-  with col_0: elem_0 = st.checkbox(f'{ori_cte[0]}', value=False)
-  with col_1: elem_1 = st.checkbox(f'{ori_cte[1]}', value=False)
-  with col_2: elem_2 = st.checkbox(f'{ori_cte[2]}', value=False)
-  with col_3: elem_3 = st.checkbox(f'{ori_cte[3]}', value=False)
-  with col_0_2: elem_4 = st.checkbox(f'{ori_cte[4]}', value=False)
-  with col_1_2: elem_5 = st.checkbox(f'{ori_cte[5]}', value=False)
-  with col_2_2: elem_6 = st.checkbox(f'{ori_cte[6]}', value=False)
-  with col_3_2: elem_7 = st.checkbox(f'{ori_cte[7]}', value=False)
-  with col_0_3: elem_8 = st.checkbox(f'{ori_cte[8]}', value=False)
-  with col_1_3: elem_9 = st.checkbox(f'{ori_cte[9]}', value=False)
-  with col_2_3: elem_10 = st.checkbox(f'{ori_cte[10]}', value=False)
-  with col_3_3: elem_11 = st.checkbox(f'{ori_cte[11]}', value=False)
-  with col_0_4: elem_12 = st.checkbox(f'{ori_cte[12]}', value=False)
-  with col_1_4: elem_13 = st.checkbox(f'{ori_cte[13]}', value=False)
-  with col_2_4: elem_14 = st.checkbox(f'{ori_cte[14]}', value=False)
-  with col_3_4: elem_15 = st.checkbox(f'{ori_cte[15]}', value=False)
-  with col_0_5: elem_16 = st.checkbox(f'{ori_cte[16]}', value=False)
-  with col_1_5: elem_17 = st.checkbox(f'{ori_cte[17]}', value=False)
-  with col_2_5: elem_18 = st.checkbox(f'{ori_cte[18]}', value=False)
-  with col_3_5: elem_19 = st.checkbox(f'{ori_cte[19]}', value=False)
-  with col_0_6: elem_20 = st.checkbox(f'{ori_cte[20]}', value=False)
-  with col_1_6: elem_21 = st.checkbox(f'{ori_cte[21]}', value=False)
-  with col_2_6: elem_22 = st.checkbox(f'{ori_cte[22]}', value=False)
-  with col_3_6: elem_23 = st.checkbox(f'{ori_cte[23]}', value=False)
-  with col_0_7: elem_24 = st.checkbox(f'{ori_cte[24]}', value=False)
-  with col_1_7: elem_25 = st.checkbox(f'{ori_cte[25]}', value=False)
-  with col_2_7: elem_26 = st.checkbox(f'{ori_cte[26]}', value=False)
-  with col_3_7: elem_27 = st.checkbox(f'{ori_cte[27]}', value=False)
-  with col_0_8: elem_28 = st.checkbox(f'{ori_cte[28]}', value=False)
-  with col_1_8: elem_29 = st.checkbox(f'{ori_cte[29]}', value=False)
-  with col_2_8: elem_30 = st.checkbox(f'{ori_cte[30]}', value=False)
-  with col_3_8: elem_31 = st.checkbox(f'{ori_cte[31]}', value=False)
-  with col_0_9: elem_32 = st.checkbox(f'{ori_cte[32]}', value=False)
-  with col_1_9: elem_33 = st.checkbox(f'{ori_cte[33]}', value=False)
-  with col_2_9: elem_34 = st.checkbox(f'{ori_cte[34]}', value=False)
-  with col_3_9: elem_35 = st.checkbox(f'{ori_cte[35]}', value=False)
-  with col_0_10: elem_36 = st.checkbox(f'{ori_cte[36]}', value=False)
-  with col_1_10: elem_37 = st.checkbox(f'{ori_cte[37]}', value=False)
-  with col_2_10: elem_38 = st.checkbox(f'{ori_cte[38]}', value=False)
-  with col_3_10: elem_39 = st.checkbox(f'{ori_cte[39]}', value=False)
-  with colu_0: elem_40 = st.checkbox(f'{ori_cte[40]}', value=False)
-  with colu_1: elem_41 = st.checkbox(f'{ori_cte[41]}', value=False)
-  with colu_2: elem_42 = st.checkbox(f'{ori_cte[42]}', value=False)
-  with colu_3: elem_43 = st.checkbox(f'{ori_cte[43]}', value=False)
-  with colu_0_2: elem_44 = st.checkbox(f'{ori_cte[44]}', value=False)
-  with colu_1_2: elem_45 = st.checkbox(f'{ori_cte[45]}', value=False)
-  with colu_2_2: elem_46 = st.checkbox(f'{ori_cte[46]}', value=False)
-  with colu_3_2: elem_47 = st.checkbox(f'{ori_cte[47]}', value=False)
-  with colu_0_3: elem_48 = st.checkbox(f'{ori_cte[48]}', value=False)
-  with colu_1_3: elem_49 = st.checkbox(f'{ori_cte[49]}', value=False)
-  with colu_2_3: elem_50 = st.checkbox(f'{ori_cte[50]}', value=False)
-  with colu_3_3: elem_51 = st.checkbox(f'{ori_cte[51]}', value=False)
-  with colu_0_4: elem_52 = st.checkbox(f'{ori_cte[52]}', value=False)
-  with colu_1_4: elem_53 = st.checkbox(f'{ori_cte[53]}', value=False)
-  with colu_2_4: elem_54 = st.checkbox(f'{ori_cte[54]}', value=False)
-  with colu_3_4: elem_55 = st.checkbox(f'{ori_cte[55]}', value=False)
-  with colu_0_5: elem_56 = st.checkbox(f'{ori_cte[56]}', value=False)
-  with colu_1_5: elem_57 = st.checkbox(f'{ori_cte[57]}', value=False)
-  with colu_2_5: elem_58 = st.checkbox(f'{ori_cte[58]}', value=False)
-  with colu_3_5: elem_59 = st.checkbox(f'{ori_cte[59]}', value=False)
-  with colu_0_6: elem_60 = st.checkbox(f'{ori_cte[60]}', value=False)
-  with colu_1_6: elem_61 = st.checkbox(f'{ori_cte[61]}', value=False)
-  with colu_2_6: elem_62 = st.checkbox(f'{ori_cte[62]}', value=False)
-  with colu_3_6: elem_63 = st.checkbox(f'{ori_cte[63]}', value=False)
-  # with colu_0_7: elem_64 = st.checkbox(f'{ori_cte[64]}', value=False)
-  # with colu_1_7: elem_65 = st.checkbox(f'{ori_cte[65]}', value=False)
-  # with colu_2_7: elem_66 = st.checkbox(f'{ori_cte[66]}', value=False)
-  # with colu_3_7: elem_67 = st.checkbox(f'{ori_cte[67]}', value=False)
-  # with colu_0_8: elem_68 = st.checkbox(f'{ori_cte[68]}', value=False)
-  # with colu_1_8: elem_69 = st.checkbox(f'{ori_cte[69]}', value=False)
-  # with colu_2_8: elem_70 = st.checkbox(f'{ori_cte[70]}', value=False)
-  # with colu_3_8: elem_71 = st.checkbox(f'{ori_cte[71]}', value=False)
-  # with colu_0_9: elem_72 = st.checkbox(f'{ori_cte[72]}', value=False)
-  # with colu_1_9: elem_73 = st.checkbox(f'{ori_cte[73]}', value=False)
-  # with colu_2_9: elem_74 = st.checkbox(f'{ori_cte[74]}', value=False)
-  # with colu_3_9: elem_75 = st.checkbox(f'{ori_cte[75]}', value=False)
-  # with colu_0_10: elem_76 = st.checkbox(f'{ori_cte[76]}', value=False)
-  # with colu_1_10: elem_77 = st.checkbox(f'{ori_cte[77]}', value=False)
-  # with colu_2_10: elem_78 = st.checkbox(f'{ori_cte[78]}', value=False)
-  # with colu_3_10: elem_79 = st.checkbox(f'{ori_cte[79]}', value=False)
-  # with colum_0: elem_80 = st.checkbox(f'{ori_cte[80]}', value=False)
-  # with colum_1: elem_81 = st.checkbox(f'{ori_cte[81]}', value=False)
-  # with colum_2: elem_82 = st.checkbox(f'{ori_cte[82]}', value=False)
-  # with colum_3: elem_83 = st.checkbox(f'{ori_cte[83]}', value=False)
-  # with colum_0_2: elem_84 = st.checkbox(f'{ori_cte[84]}', value=False)
-  # with colum_1_2: elem_85 = st.checkbox(f'{ori_cte[85]}', value=False)
-  # with colum_2_2: elem_86 = st.checkbox(f'{ori_cte[86]}', value=False)
-  # with colum_3_2: elem_87 = st.checkbox(f'{ori_cte[87]}', value=False)
-  # with colum_0_3: elem_88 = st.checkbox(f'{ori_cte[88]}', value=False)
-  # with colum_1_3: elem_89 = st.checkbox(f'{ori_cte[89]}', value=False)
-  # with colum_2_3: elem_90 = st.checkbox(f'{ori_cte[90]}', value=False)
-  # with colum_3_3: elem_91 = st.checkbox(f'{ori_cte[91]}', value=False)
-  # with colum_0_4: elem_92 = st.checkbox(f'{ori_cte[92]}', value=False)
-  # with colum_1_4: elem_93 = st.checkbox(f'{ori_cte[93]}', value=False)
-  # with colum_2_4: elem_94 = st.checkbox(f'{ori_cte[94]}', value=False)
-  # with colum_3_4: elem_95 = st.checkbox(f'{ori_cte[95]}', value=False)
-  # with colum_0_5: elem_96 = st.checkbox(f'{ori_cte[96]}', value=False)
-  # with colum_1_5: elem_97 = st.checkbox(f'{ori_cte[97]}', value=False)
-  # with colum_2_5: elem_98 = st.checkbox(f'{ori_cte[98]}', value=False)
-  # with colum_3_5: elem_99 = st.checkbox(f'{ori_cte[99]}', value=False)
-  # with colum_0_6: elem_100 = st.checkbox(f'{ori_cte[100]}', value=False)
+
+with col_0: elem_0 = st.checkbox(f'{ori_cte[0]}', value=False)
+with col_1: elem_1 = st.checkbox(f'{ori_cte[1]}', value=False)
+with col_2: elem_2 = st.checkbox(f'{ori_cte[2]}', value=False)
+with col_3: elem_3 = st.checkbox(f'{ori_cte[3]}', value=False)
+with col_0_2: elem_4 = st.checkbox(f'{ori_cte[4]}', value=False)
+with col_1_2: elem_5 = st.checkbox(f'{ori_cte[5]}', value=False)
+with col_2_2: elem_6 = st.checkbox(f'{ori_cte[6]}', value=False)
+with col_3_2: elem_7 = st.checkbox(f'{ori_cte[7]}', value=False)
+with col_0_3: elem_8 = st.checkbox(f'{ori_cte[8]}', value=False)
+with col_1_3: elem_9 = st.checkbox(f'{ori_cte[9]}', value=False)
+with col_2_3: elem_10 = st.checkbox(f'{ori_cte[10]}', value=False)
+with col_3_3: elem_11 = st.checkbox(f'{ori_cte[11]}', value=False)
+with col_0_4: elem_12 = st.checkbox(f'{ori_cte[12]}', value=False)
+with col_1_4: elem_13 = st.checkbox(f'{ori_cte[13]}', value=False)
+with col_2_4: elem_14 = st.checkbox(f'{ori_cte[14]}', value=False)
+with col_3_4: elem_15 = st.checkbox(f'{ori_cte[15]}', value=False)
+with col_0_5: elem_16 = st.checkbox(f'{ori_cte[16]}', value=False)
+with col_1_5: elem_17 = st.checkbox(f'{ori_cte[17]}', value=False)
+with col_2_5: elem_18 = st.checkbox(f'{ori_cte[18]}', value=False)
+with col_3_5: elem_19 = st.checkbox(f'{ori_cte[19]}', value=False)
+with col_0_6: elem_20 = st.checkbox(f'{ori_cte[20]}', value=False)
+with col_1_6: elem_21 = st.checkbox(f'{ori_cte[21]}', value=False)
+with col_2_6: elem_22 = st.checkbox(f'{ori_cte[22]}', value=False)
+with col_3_6: elem_23 = st.checkbox(f'{ori_cte[23]}', value=False)
+with col_0_7: elem_24 = st.checkbox(f'{ori_cte[24]}', value=False)
+with col_1_7: elem_25 = st.checkbox(f'{ori_cte[25]}', value=False)
+with col_2_7: elem_26 = st.checkbox(f'{ori_cte[26]}', value=False)
+with col_3_7: elem_27 = st.checkbox(f'{ori_cte[27]}', value=False)
+with col_0_8: elem_28 = st.checkbox(f'{ori_cte[28]}', value=False)
+with col_1_8: elem_29 = st.checkbox(f'{ori_cte[29]}', value=False)
+with col_2_8: elem_30 = st.checkbox(f'{ori_cte[30]}', value=False)
+with col_3_8: elem_31 = st.checkbox(f'{ori_cte[31]}', value=False)
+with col_0_9: elem_32 = st.checkbox(f'{ori_cte[32]}', value=False)
+with col_1_9: elem_33 = st.checkbox(f'{ori_cte[33]}', value=False)
+with col_2_9: elem_34 = st.checkbox(f'{ori_cte[34]}', value=False)
+with col_3_9: elem_35 = st.checkbox(f'{ori_cte[35]}', value=False)
+with col_0_10: elem_36 = st.checkbox(f'{ori_cte[36]}', value=False)
+with col_1_10: elem_37 = st.checkbox(f'{ori_cte[37]}', value=False)
+with col_2_10: elem_38 = st.checkbox(f'{ori_cte[38]}', value=False)
+with col_3_10: elem_39 = st.checkbox(f'{ori_cte[39]}', value=False)
+with colu_0: elem_40 = st.checkbox(f'{ori_cte[40]}', value=False)
+with colu_1: elem_41 = st.checkbox(f'{ori_cte[41]}', value=False)
+with colu_2: elem_42 = st.checkbox(f'{ori_cte[42]}', value=False)
+with colu_3: elem_43 = st.checkbox(f'{ori_cte[43]}', value=False)
+with colu_0_2: elem_44 = st.checkbox(f'{ori_cte[44]}', value=False)
+with colu_1_2: elem_45 = st.checkbox(f'{ori_cte[45]}', value=False)
+with colu_2_2: elem_46 = st.checkbox(f'{ori_cte[46]}', value=False)
+with colu_3_2: elem_47 = st.checkbox(f'{ori_cte[47]}', value=False)
+with colu_0_3: elem_48 = st.checkbox(f'{ori_cte[48]}', value=False)
+with colu_1_3: elem_49 = st.checkbox(f'{ori_cte[49]}', value=False)
+with colu_2_3: elem_50 = st.checkbox(f'{ori_cte[50]}', value=False)
+with colu_3_3: elem_51 = st.checkbox(f'{ori_cte[51]}', value=False)
+with colu_0_4: elem_52 = st.checkbox(f'{ori_cte[52]}', value=False)
+with colu_1_4: elem_53 = st.checkbox(f'{ori_cte[53]}', value=False)
+with colu_2_4: elem_54 = st.checkbox(f'{ori_cte[54]}', value=False)
+with colu_3_4: elem_55 = st.checkbox(f'{ori_cte[55]}', value=False)
+with colu_0_5: elem_56 = st.checkbox(f'{ori_cte[56]}', value=False)
+with colu_1_5: elem_57 = st.checkbox(f'{ori_cte[57]}', value=False)
+with colu_2_5: elem_58 = st.checkbox(f'{ori_cte[58]}', value=False)
+with colu_3_5: elem_59 = st.checkbox(f'{ori_cte[59]}', value=False)
+with colu_0_6: elem_60 = st.checkbox(f'{ori_cte[60]}', value=False)
+with colu_1_6: elem_61 = st.checkbox(f'{ori_cte[61]}', value=False)
+with colu_2_6: elem_62 = st.checkbox(f'{ori_cte[62]}', value=False)
+with colu_3_6: elem_63 = st.checkbox(f'{ori_cte[63]}', value=False)
 
 if elem_0: cates.append(f'{ori_cte[0]}')
 if elem_1: cates.append(f'{ori_cte[1]}')
@@ -547,48 +396,10 @@ if elem_60: cates.append(f'{ori_cte[60]}')
 if elem_61: cates.append(f'{ori_cte[61]}')
 if elem_62: cates.append(f'{ori_cte[62]}')
 if elem_63: cates.append(f'{ori_cte[63]}')
-# if elem_64: cates.append(f'{ori_cte[64]}')
-# if elem_65: cates.append(f'{ori_cte[65]}')
-# if elem_66: cates.append(f'{ori_cte[66]}')
-# if elem_67: cates.append(f'{ori_cte[67]}')
-# if elem_68: cates.append(f'{ori_cte[68]}')
-# if elem_69: cates.append(f'{ori_cte[69]}')
-# if elem_70: cates.append(f'{ori_cte[70]}')
-# if elem_71: cates.append(f'{ori_cte[71]}')
-# if elem_72: cates.append(f'{ori_cte[72]}')
-# if elem_73: cates.append(f'{ori_cte[73]}')
-# if elem_74: cates.append(f'{ori_cte[74]}')
-# if elem_75: cates.append(f'{ori_cte[75]}')
-# if elem_76: cates.append(f'{ori_cte[76]}')
-# if elem_77: cates.append(f'{ori_cte[77]}')
-# if elem_78: cates.append(f'{ori_cte[78]}')
-# if elem_79: cates.append(f'{ori_cte[79]}')
-# if elem_80: cates.append(f'{ori_cte[80]}')
-# if elem_81: cates.append(f'{ori_cte[81]}')
-# if elem_82: cates.append(f'{ori_cte[82]}')
-# if elem_83: cates.append(f'{ori_cte[83]}')
-# if elem_84: cates.append(f'{ori_cte[84]}')
-# if elem_85: cates.append(f'{ori_cte[85]}')
-# if elem_86: cates.append(f'{ori_cte[86]}')
-# if elem_87: cates.append(f'{ori_cte[87]}')
-# if elem_88: cates.append(f'{ori_cte[88]}')
-# if elem_89: cates.append(f'{ori_cte[89]}')
-# if elem_90: cates.append(f'{ori_cte[90]}')
-# if elem_91: cates.append(f'{ori_cte[91]}')
-# if elem_92: cates.append(f'{ori_cte[92]}')
-# if elem_93: cates.append(f'{ori_cte[93]}')
-# if elem_94: cates.append(f'{ori_cte[94]}')
-# if elem_95: cates.append(f'{ori_cte[95]}')
-# if elem_96: cates.append(f'{ori_cte[96]}')
-# if elem_97: cates.append(f'{ori_cte[97]}')
-# if elem_98: cates.append(f'{ori_cte[98]}')
-# if elem_99: cates.append(f'{ori_cte[99]}')
-# if elem_100: cates.append(f'{ori_cte[100]}')
 
 
 st.write('選択中:', cates)
 
-prefecture_ori = ['hokkaido', 'aomori', 'iwate', 'miyagi', 'akita', 'yamagata', 'fukushima', 'ibaraki', 'tochigi', 'gumma', 'saitama', 'chiba', 'tokyo', 'kanagawa', 'niigata', 'toyama', 'ishikawa', 'fukui', 'yamanashi', 'nagano', 'gifu', 'shizuoka', 'aichi', 'mie', 'shiga', 'kyoto', 'osaka', 'hyogo', 'nara', 'wakayama','tottori', 'shimane', 'okayama', 'hiroshima', 'yamaguchi', 'tokushima', 'kagawa', 'ehime', 'kochi', 'fukuoka', 'saga', 'nagasaki', 'kumamoto', 'oita', 'miyazaki', 'kagoshima', 'okinawa']
 # last_number = st.number_input('取得カテゴリー数を入力してください。', 1, 100, 1)
 button = st.button('Start')
 latest_interation = st.empty()
@@ -701,17 +512,6 @@ def main(c_number, select_pre):
         'ソースURL': page_url,
       })
       df = pd.DataFrame(d_list)
-      ##################################
-      # pre_all.append({
-      #   '会社名': 'アクセスエラー',
-      #   '設立年': 'アクセスエラー',
-      #   '従業員数': 'アクセスエラー',
-      #   '住所': 'アクセスエラー',
-      #   '会社URL': 'アクセスエラー',
-      #   'ソースURL': page_url,
-      # })
-      # df = None
-      # pass
     else:
       titel = page_soup.select_one('titel')
       if titel:
@@ -775,97 +575,30 @@ def main(c_number, select_pre):
           print('住所:', detail[3])
           print('会社URL:', detail[4])
 
-          d_list.append({
-            '会社名': detail[0],
-            '設立年': detail[1],
-            '従業員数': detail[2],
-            '住所': detail[3],
-            '会社URL': detail[4],
-            'ソースURL': detail_url,
-          })
+          d_list.append({'会社名': detail[0],'設立年': detail[1],'従業員数': detail[2],'住所': detail[3],'会社URL': detail[4],'ソースURL': detail_url})
 
           df = pd.DataFrame(d_list)
           ##################################
-          pre_all.append({
-            '会社名': detail[0],
-            '設立年': detail[1],
-            '従業員数': detail[2],
-            '住所': detail[3],
-            '会社URL': detail[4],
-            'ソースURL': detail_url,
-          })
+          pre_all.append({'会社名': detail[0],'設立年': detail[1],'従業員数': detail[2],'住所': detail[3],'会社URL': detail[4],'ソースURL': detail_url})
 
           if (select_pre == 'hokkaido') or (select_pre == 'aomori') or (select_pre == 'iwate') or (select_pre == 'miyagi') or (select_pre == 'akita') or (select_pre == 'yamagata') or (select_pre == 'fukushima'):
-            tohoku.append({
-              '会社名': detail[0],
-              '設立年': detail[1],
-              '従業員数': detail[2],
-              '住所': detail[3],
-              '会社URL': detail[4],
-              'ソースURL': detail_url,
-            })
+            tohoku.append({'会社名': detail[0],'設立年': detail[1],'従業員数': detail[2],'住所': detail[3],'会社URL': detail[4],'ソースURL': detail_url})
           elif (select_pre == 'ibaraki') or (select_pre == 'tochigi') or (select_pre == 'gumma') or (select_pre == 'saitama') or (select_pre == 'chiba') or (select_pre == 'tokyo') or (select_pre == 'kanagawa'):
-            kantou.append({
-              '会社名': detail[0],
-              '設立年': detail[1],
-              '従業員数': detail[2],
-              '住所': detail[3],
-              '会社URL': detail[4],
-              'ソースURL': detail_url,
-            })
+            kantou.append({'会社名': detail[0],'設立年': detail[1],'従業員数': detail[2],'住所': detail[3],'会社URL': detail[4],'ソースURL': detail_url})
           elif (select_pre == 'niigata') or (select_pre == 'toyama') or (select_pre == 'ishikawa') or (select_pre == 'fukui') or (select_pre == 'yamanashi') or (select_pre == 'nagano'):
-            hokuriku.append({
-              '会社名': detail[0],
-              '設立年': detail[1],
-              '従業員数': detail[2],
-              '住所': detail[3],
-              '会社URL': detail[4],
-              'ソースURL': detail_url,
-            })
+            hokuriku.append({'会社名': detail[0],'設立年': detail[1],'従業員数': detail[2],'住所': detail[3],'会社URL': detail[4],'ソースURL': detail_url})
           elif (select_pre == 'gifu') or (select_pre == 'shizuoka') or (select_pre == 'aichi') or (select_pre == 'mie'):
-            tokai.append({
-              '会社名': detail[0],
-              '設立年': detail[1],
-              '従業員数': detail[2],
-              '住所': detail[3],
-              '会社URL': detail[4],
-              'ソースURL': detail_url,
-            })
+            tokai.append({'会社名': detail[0],'設立年': detail[1],'従業員数': detail[2],'住所': detail[3],'会社URL': detail[4],'ソースURL': detail_url})
           elif (select_pre == 'shiga') or (select_pre == 'kyoto') or (select_pre == 'osaka') or (select_pre == 'hyogo') or (select_pre == 'nara') or (select_pre == 'wakayama'):
-            kinki.append({
-              '会社名': detail[0],
-              '設立年': detail[1],
-              '従業員数': detail[2],
-              '住所': detail[3],
-              '会社URL': detail[4],
-              'ソースURL': detail_url,
-            })
+            kinki.append({'会社名': detail[0],'設立年': detail[1],'従業員数': detail[2],'住所': detail[3],'会社URL': detail[4],'ソースURL': detail_url})
           elif (select_pre == 'tottori') or (select_pre == 'shimane') or (select_pre == 'okayama') or (select_pre == 'hiroshima') or (select_pre == 'yamaguchi') or (select_pre == 'tokushima') or (select_pre == 'kagawa') or (select_pre == 'ehime') or (select_pre == 'kochi'):
-            tyugoku.append({
-              '会社名': detail[0],
-              '設立年': detail[1],
-              '従業員数': detail[2],
-              '住所': detail[3],
-              '会社URL': detail[4],
-              'ソースURL': detail_url,
-            })
+            tyugoku.append({'会社名': detail[0],'設立年': detail[1],'従業員数': detail[2],'住所': detail[3],'会社URL': detail[4],'ソースURL': detail_url})
           elif (select_pre == 'fukuoka') or (select_pre == 'saga') or (select_pre == 'nagasaki') or (select_pre == 'kumamoto') or (select_pre == 'oita') or (select_pre == 'miyazaki') or (select_pre == 'kagoshima') or (select_pre == 'okinawa'):
-            kyusyu.append({
-              '会社名': detail[0],
-              '設立年': detail[1],
-              '従業員数': detail[2],
-              '住所': detail[3],
-              '会社URL': detail[4],
-              'ソースURL': detail_url,
-            })
-
-    
+            kyusyu.append({'会社名': detail[0],'設立年': detail[1],'従業員数': detail[2],'住所': detail[3],'会社URL': detail[4],'ソースURL': detail_url})
+   
     return df
-#       # df.to_csv(csv_name, index=False, encoding='utf-8-sig')
 
 if button:
-  # cates = ['ホームページ制作', 'アプリ開発', 'システム開発', 'ITインフラ構築', 'データセンター', '情報システム代行']
-  # cates = cates[:last_number]
   csvs = []
   for i, cate_elem in enumerate(cates):
     c_number = int(str(cate_elem).split('_')[0])
@@ -874,18 +607,13 @@ if button:
     print('cate:',cate)
     for k, select_pre in enumerate(prefecture):
       df = main(c_number, select_pre)
-      # print(df)
       st.write(f'### {cate} ({select_pre})結果 {k+i+1}/{len(cates)*len(prefecture)}', df)
-      # with pd.ExcelWriter("export_data.xlsx") as EW:
-      #   csv = df.to_excel(EW, index=False, sheet_name=f"{cate}")
       print(any(df))
-      # if df != None:
       if any(df) == True:
         csv = df.to_csv(index=False, encoding='utf-8-sig')
         b64 = base64.b64encode(csv.encode('utf-8-sig')).decode()
         href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_{select_pre}.csv">Download</a>'
         st.markdown(f"{cate}_{select_pre}.csv: {href}", unsafe_allow_html=True)
-    # csvs.append(csv)
   st.write(f'## --------------------------')
   #################################################
   df_pre_all = pd.DataFrame(pre_all)
@@ -936,8 +664,4 @@ if button:
   href = f'<a href="data:application/octet-stream;base64,{b64}" download="{cate}_九州・沖縄.csv">Download</a>'
   st.markdown(f"{cate}_九州・沖縄.csv: {href}", unsafe_allow_html=True)
   st.write(f'## ---------Done----------')
-  # for csv in csvs:
-  #   b64 = base64.b64encode(csv.encode('utf-8-sig')).decode()
-  #   href = f'<a href="data:application/octet-stream;base64,{b64}" download="result.csv">download</a>'
-  #   st.markdown(f"ダウンロードする {href}", unsafe_allow_html=True)
 
