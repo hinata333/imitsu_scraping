@@ -231,22 +231,24 @@ st.write('選択中:', prefecture)
 cates = []
 ori_cte = [None]*101
 ori_cte_index = [None]*101
-url = 'https://imitsu.jp/'
-while True:
-  try:
-    sleep(2)
-    r = requests.get(url, timeout=3)
-    r.raise_for_status()
-  except Exception as e:
-    print('-----ERROR(リトライ中)-----')
-  else:
-    break
-soup = BeautifulSoup(r.content, 'lxml')
-ori_cte_elem = soup.select('div.category-main a.ga_event')
+# url = 'https://imitsu.jp/'
+# while True:
+#   try:
+#     sleep(2)
+#     r = requests.get(url, timeout=3)
+#     r.raise_for_status()
+#   except Exception as e:
+#     print('-----ERROR(リトライ中)-----')
+#   else:
+#     break
+# soup = BeautifulSoup(r.content, 'lxml')
+# ori_cte_elem = soup.select('div.category-main a.ga_event')
+ori_cte_elem = ['ホームページ制作', 'システム開発', 'アプリ開発', 'ECサイト構築', 'ITインフラ構築', '情報システム代行', 'データセンター', '動画制作・映像制作', 'イベント企画', 'PR','マス広告', '音楽制作', '商品撮影', '店舗コンサルティング', '交通広告', '編集プロダクション', '店舗販促・サンプリング', '資料作成', 'リスティング広告', 'SEO対策','マーケティングリサーチ', 'Web広告', '営業代行', 'DM発送', 'コールセンター', 'ノベルティ制作', '印刷', 'カーリース', '物流倉庫', '看板製作','OA機器', '福利厚生代行', '法人向けパソコン', '社員旅行', 'ビジネスフォン', '什器', 'コピー機', 'オンライン秘書', 'データ入力・集計', '産業廃棄物処理','社員研修', '人材紹介', '人材派遣', '求人広告', '採用コンサルティング・採用代行', 'オフィス清掃', 'オフィス警備', '店舗デザイン', 'オフィスデザイン', '電気工事','デザイン制作', '解体工事', '電気通信工事', '税理士', '資金調達', '社会保険労務士', 'M&A仲介', '行政書士', '助成金', 'コンサルティング', '司法書士', '風評被害対策', '通訳','翻訳']
+# print(len(ori_cte_elem))
 for c, cte in enumerate(ori_cte_elem):
-  ori_cte[c] = str(c) + '_' + cte.text
+  ori_cte[c] = str(c) + '_' + cte
 
-st.write('カテゴリー数:', len(ori_cte_elem)-37)
+st.write('カテゴリー数:', len(ori_cte_elem))
 st.write(' ')
 # all_cate = st.checkbox('一括チェック', value=False)
 st.write('・取得するカテゴリーを選択して下さい。')
